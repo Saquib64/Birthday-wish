@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Anaiza Azmi! ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&family=Great+Vibes&family=Pacifico&family=Caveat&family=Indie+Flower&display=swap'); /* Added more fonts for 'Love' animation */
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Default body font */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            margin: 0;
+            color: #333;
+            stroke: #f8d030; /* This CSS property is not standard for text stroke, use text-shadow or SVG for text effects */
+            scroll-behavior: smooth;
+            position: relative; /* For background image */
+        }
+
+        /* Anime Background Image */
+        #background-image-container {
+            position: fixed;
+            opacity: 1; /* Changed from 100 to 1 for valid CSS opacity value */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Behind content */
+            background-image: url('https://m.gettywallpapers.com/wp-content/uploads/2024/01/Love-Desktop-Wallpaper.jpg'); /* Your provided background image */
+            background-size: cover;
+            background-position: center;
+            /* Removed filter: blur(3px) brightness(0.7); as requested, no blur */
+        }
+
+        /* Initial Music Prompt Overlay */
+        #music-prompt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 110; /* Above everything */
+            color: white;
+            text-align: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #music-prompt-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #music-prompt-overlay button {
+            background-color: #ff69b4; /* Hot pink */
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            border: none;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #music-prompt-overlay button:hover {
+            background-color: #e05c9e;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Hearts and Flowers */
+        .floating-element {
+            position: absolute;
+            animation: floatUp ease-in-out infinite;
+            opacity: 0;
+            pointer-events: none;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            z-index: 50; /* Above background, below main content */
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10%) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing Heading Animation */
+        .glowing-text {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff69b4, 0 0 20px #ff69b4, 0 0 25px #ff69b4, 0 0 30px #ff69b4, 0 0 35px #ff69b4;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff69b4, 0 0 40px #ff69b4, 0 0 50px #ff69b4, 0 0 60px #ff69b4, 0 0 70px #ff69b4;
+            }
+        }
+
+        /* Photo Gallery Hover Effects */
+        .photo-card-inner {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .photo-card:hover .photo-card-inner {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4); /* Pink glow */
+        }
+        .photo-card:hover .photo-card-inner img {
+            filter: brightness(1.1);
+        }
+
+        /* Heart Bounce on Hover */
+        .photo-card:hover .heart-overlay {
+            animation: heartBounce 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes heartBounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Video Modal Styles */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .video-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-modal-content {
+            position: relative;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translateY(20px); /* Slide in effect */
+            opacity: 0;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+        .video-modal-overlay.active .video-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .video-modal-content video { /* Targeting the video element */
+            width: 80vw;
+            height: 45vw; /* Maintain 16:9 aspect ratio */
+            max-width: 800px;
+            max-height: 450px;
+            border-radius: 0.75rem;
+        }
+
+        .close-modal-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #888;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .close-modal-button:hover {
+            background-color: #f0f0f0;
+            color: #555;
+        }
+
+        /* Music control button */
+        #music-control {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        #music-control:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+
+        /* Confetti for cake tap */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b; /* Yellow */
+            border-radius: 50%;
+            animation: confetti-fall linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Question section styling */
+        .question-container {
+            min-height: 250px; /* Ensure consistent height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .question-buttons button {
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .question-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .no-button-jumping {
+            position: absolute; /* For dynamic positioning */
+        }
+
+        /* Typing effect for Shayari */
+        .typing-text {
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            white-space: pre-wrap; /* Keeps the text on a single line until line breaks */
+            margin: 0 auto;
+            letter-spacing: .05em; /* Adjust as needed for better readability */
+            animation:
+                typing 3.5s steps(40, end) forwards,
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ff69b4; } /* Pink cursor */
+        }
+
+        /* Initial hidden state for sections */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cake Candles */
+        .candle-container {
+            position: absolute;
+            top: 5%; /* Adjust based on cake image */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            z-index: 1; /* Above cake */
+        }
+
+        .candle {
+            width: 8px;
+            height: 30px;
+            background-color: #f8d030; /* Yellow candle */
+            border-radius: 2px 2px 0 0;
+            position: relative;
+            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        .flame {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 15px;
+            background-color: #ffcc00; /* Yellow flame */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 8px 2px #ffcc00, 0 0 15px 4px rgba(255, 204, 0, 0.7);
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+            50% { transform: translateX(-50%) scaleY(0.95); opacity: 0.9; }
+            100% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+        }
+
+        .candle-blow-out .flame {
+            animation: none;
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px) scale(0);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        /* Love Meter */
+        .love-meter-container {
+            width: 200px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .love-meter-fill {
+            width: 0%; /* Controlled by JS */
+            height: 100%;
+            background: linear-gradient(to right, #ff69b4, #ff007f);
+            border-radius: 20px;
+            transition: width 2s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .love-meter-text {
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Animated Love Text */
+        #animated-love {
+            display: inline-block; /* Allows text to change size without affecting layout too much */
+            transition: font-family 0.5s ease-in-out, color 0.5s ease-in-out, transform 0.2s ease-out;
+            font-weight: bold; /* Ensure it's always bold */
+        }
+
+    </style>
+</head>
+<body class="relative">
+
+    <div id="background-image-container"></div>
+
+    <div id="music-prompt-overlay" class="font-['Poppins']">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 glowing-text font-['Great_Vibes']">A Special Gift for Anaiza Azmi!</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200">Tap to begin your journey and play a romantic tune.</p>
+        <button id="start-journey-button" class="font-['Poppins']">Start Journey</button>
+    </div>
+
+    <div id="birthday-page" class="min-h-screen relative overflow-hidden bg-white bg-opacity-70">
+        <div id="floating-elements-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10"></div>
+
+        <div class="container mx-auto p-4 md:p-8 relative z-20">
+
+            <section id="greeting-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-pink-600 mb-6 font-['Dancing_Script'] glowing-text">
+                    ~Happy Birthday Anaiza Azmi~
+                    💝
+                </h1>
+                <p class="text-2xl md:text-4xl text-purple-700 font-semibold mb-12 font-['Poppins']">
+                    Here's a little surprise for you!
+                </p>
+                <div class="animate-bounce-slow text-5xl md:text-6xl text-pink-500">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="cake-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-pink-700 mb-8 font-['Dancing_Script']">Make a Wish!</h2>
+                <div id="cake-container" class="relative w-full max-w-sm mx-auto cursor-pointer p-4 rounded-xl shadow-2xl bg-white bg-opacity-80 transition-all duration-300 hover:scale-105">
+                    <!--
+                        TO CHANGE CAKE IMAGE:
+                        Replace the 'src' URL below with the direct link to your cake PNG image.
+                        Example: <img id="cake-image" src="https://your-image-host.com/path/to/your/cake.png" alt="Birthday Cake" class="w-full h-auto">
+                    -->
+                    <img id="cake-image" src="image/Cake.jpg" alt="Birthday Cake" class="w-full h-auto">
+                    <div id="candles" class="candle-container">
+                        </div>
+                    <p class="text-xl md:text-2xl text-gray-700 mt-4 font-semibold font-['Poppins']">Tap the cake to blow out the candles!</p>
+                </div>
+            </section>
+
+            <section id="gift-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-purple-700 mb-8 font-['Dancing_Script']">Your Special Gift Awaits!</h2>
+                <button id="gift-button" class="bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out text-lg md:text-2xl flex items-center justify-center font-['Poppins']">
+                    <i class="fas fa-gift mr-3 text-3xl"></i> Tap to Open Gift
+                </button>
+            </section>
+
+            <section id="photo-gallery-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-pink-700 mb-12 font-['Dancing_Script']">Our Beautiful Memories</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
+                    <!--
+                        TO ADD/CHANGE PHOTOS:
+                        Replace the 'src' URLs below with your actual photo URLs.
+                        You can add more 'div.photo-card' blocks for more photos (3-6 recommended).
+                        Ensure images are roughly similar aspect ratios for best grid display.
+                    -->
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi1.jpg.jpg" alt="ANAIZA PHOTO 1" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">Beautyyyy!</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi2.jpg.jpg" alt="anaiza 2" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">Cuteyyyyyy</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi3.jpg.jpg" alt="anaiza 3" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">Lovelyyyyyyyyy</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi4.jpg.jpg" alt="anaiza 4" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">Flawlessss</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi5.jpg.jpg" alt="anaiza 5" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">Innocenttttt</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                    <div class="photo-card relative group">
+                        <div class="photo-card-inner bg-white rounded-xl shadow-xl overflow-hidden">
+                            <img src="image/azmi6.jpg.jpg" alt="anaiza 6" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <p class="text-gray-700 text-sm font-['Poppins']">spectacularrrrr</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-heart text-pink-500 text-3xl absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 heart-overlay"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section id="questions-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-pink-700 mb-12 font-['Dancing_Script']">A Little Challenge for You...</h2>
+                <div class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-2xl mx-auto border-4 border-purple-300 relative overflow-hidden">
+                    <div id="question-display" class="question-container">
+                        <p id="current-question" class="text-2xl md:text-3xl font-semibold text-gray-800 mb-8 font-['Poppins']"></p>
+                        <div id="question-image-container" class="mb-8">
+                            <img id="question-image" src="" alt="Question response" class="max-w-xs md:max-w-sm mx-auto rounded-lg shadow-md hidden">
+                        </div>
+                        <div id="question-buttons" class="flex flex-col sm:flex-row gap-6 w-full justify-center">
+                            <button id="yes-button" class="bg-green-500 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg hover:bg-green-600 flex items-center justify-center font-['Poppins']">
+                                YES <i class="fas fa-heart ml-2"></i>
+                            </button>
+                            <button id="no-button" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg hover:bg-red-600 flex items-center justify-center font-['Poppins']">
+                                NO <i class="fas fa-face-grimace ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shayari-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-pink-700 mb-12 font-['Dancing_Script']">For My Love...</h2>
+                <div class="bg-white p-6 md:p-10 rounded-xl shadow-2xl max-w-3xl mx-auto border-4 border-pink-300 transform transition-transform duration-500 hover:scale-105">
+                    <p id="shayari-text" class="text-lg md:text-xl text-gray-800 leading-relaxed italic text-center font-['Dancing_Script'] typing-text">
+                        </p>
+                </div>
+            </section>
+
+            <section id="final-message-section" class="min-h-screen flex flex-col justify-center items-center text-center py-16 section-hidden">
+                <h2 class="text-4xl md:text-5xl font-bold text-purple-700 mb-8 font-['Dancing_Script']">My World, My Joy, My Peace!</h2>
+                <p class="text-2xl md:text-3xl text-gray-800 leading-relaxed mb-12 font-['Poppins']">
+                    Meri pyaari Anaiza,
+
+                   Happy Birthday, meri jaan. Tumhari har khwahish poori ho, 
+                    aur tumhari zindagi hamesha khushiyon aur pyaar se bhari rahe.
+                    Tumhare bina meri zindagi adhoori hai. I <span id="animated-love" class="text-pink-500 text-4xl">Love</span> you, always and forever. 💖 
+                </p>
+                <div class="relative w-full max-w-md mx-auto flex flex-col items-center">
+                    <div class="love-meter-container">
+                        <div class="love-meter-fill" id="love-meter-fill">
+                            <span class="love-meter-text" id="love-meter-percentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <div id="video-modal-overlay" class="video-modal-overlay">
+        <div class="video-modal-content">
+            <button class="close-modal-button" id="close-video-modal">×</button>
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 font-['Poppins']">A Special Message Just For You!</h3>
+            <!--
+                TO ADD YOUR VIDEO FILE:
+                1. Replace 'image/azmivideo.mp4' with the EXACT path and filename of your video.
+                   Example: 'images/anaiza_surprise.mp4'
+                2. Ensure the 'type' attribute matches your video file format (e.g., video/mp4, video/webm, video/ogg).
+                3. 'muted' and 'playsinline' are added for better autoplay compatibility across browsers.
+                4. The 'onerror' attribute will log an error to your browser's console if the video fails to load.
+                5. The fallback source is a public test video. If your video doesn't play, try commenting out your source line
+                   and see if the test video plays. This helps diagnose if the issue is your file or the player setup.
+            -->
+            <video id="birthday-video" width="560" height="315" controls class="w-full h-auto rounded-lg" preload="auto" muted playsinline onerror="console.error('Video failed to load. Check path and format:', this.src);">
+                <source src="image/azmivideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="text-sm text-gray-500 mt-4">*(If your video doesn't play, check the console for errors or try the sample video link)*</p>
+        </div>
+    </div>
+
+    <button id="music-control" class="flex items-center justify-center">
+        <i id="music-icon" class="fas fa-volume-up text-pink-600 text-2xl"></i>
+    </button>
+
+    <audio id="background-music" loop>
+        <!--
+            TO CHANGE MUSIC:
+            Replace the 'src' URL below with the direct link to your desired MP3 music file.
+            Ensure the URL is a direct link to an MP3 file (e.g., ends with .mp3).
+            Example: <source src="https://example.com/your-romantic-song.mp3" type="audio/mpeg">
+        -->
+        <source src="image/azmibg8.mp3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const musicPromptOverlay = document.getElementById('music-prompt-overlay');
+            const startJourneyButton = document.getElementById('start-journey-button');
+            const birthdayPage = document.getElementById('birthday-page');
+            const backgroundMusic = document.getElementById('background-music');
+            const musicControl = document.getElementById('music-control');
+            const musicIcon = document.getElementById('music-icon');
+            const floatingElementsContainer = document.getElementById('floating-elements-container');
+            const cakeImage = document.getElementById('cake-image');
+            const candlesContainer = document.getElementById('candles');
+            const giftButton = document.getElementById('gift-button');
+            const videoModalOverlay = document.getElementById('video-modal-overlay');
+            const closeVideoModalButton = document.getElementById('close-video-modal');
+            const birthdayVideo = document.getElementById('birthday-video'); // This is now the <video> element
+            const photoCards = document.querySelectorAll('.photo-card');
+            const currentQuestionElement = document.getElementById('current-question');
+            const yesButton = document.getElementById('yes-button');
+            const noButton = document.getElementById('no-button');
+            const questionImage = document.getElementById('question-image');
+            const questionImageContainer = document.getElementById('question-image-container');
+            const shayariTextElement = document.getElementById('shayari-text');
+            const loveMeterFill = document.getElementById('love-meter-fill');
+            const loveMeterPercentage = document.getElementById('love-meter-percentage');
+            const backgroundImageContainer = document.getElementById('background-image-container');
+            const animatedLoveSpan = document.getElementById('animated-love');
+
+
+            let isMusicPlaying = false;
+            let currentQuestionIndex = 0;
+            let noButtonClicks = 0; // Track clicks on NO button for the jumping logic
+            let candlesLit = true; // State for candles
+
+            // Helper function to attempt playing background music and update UI
+            function tryPlayBackgroundMusic() {
+                backgroundMusic.play()
+                    .then(() => {
+                        musicIcon.classList.remove('fa-volume-mute');
+                        musicIcon.classList.add('fa-volume-up');
+                        isMusicPlaying = true;
+                    })
+                    .catch(error => {
+                        console.warn("Background music playback prevented (user interaction needed):", error);
+                        musicIcon.classList.remove('fa-volume-up');
+                        musicIcon.classList.add('fa-volume-mute');
+                        isMusicPlaying = false;
+                    });
+            }
+
+            // Helper function to pause background music and update UI
+            function tryPauseBackgroundMusic() {
+                backgroundMusic.pause();
+                musicIcon.classList.remove('fa-volume-up');
+                musicIcon.classList.add('fa-volume-mute');
+                isMusicPlaying = false;
+            }
+
+            // --- Initial Music Prompt & Page Reveal ---
+            musicPromptOverlay.style.display = 'flex'; // Ensure it's visible initially
+
+            startJourneyButton.addEventListener('click', () => {
+                musicPromptOverlay.classList.add('hidden'); // Fade out prompt
+                tryPlayBackgroundMusic(); // Attempt to play music on user interaction
+
+                // Reveal main birthday page with a slight delay
+                gsap.to(birthdayPage, { opacity: 1, duration: 1, delay: 0.5, onComplete: () => {
+                    // Start section visibility animations (triggered by IntersectionObserver)
+                    observeSections();
+                    startFloatingElements(); // Start floating elements across the page
+                    generateCandles(3); // Generate candles on the cake
+                    startAnimatedLove(); // Start the 'Love' animation
+                }});
+            });
+
+            // --- Music Control Button ---
+            musicControl.addEventListener('click', () => {
+                if (backgroundMusic.paused) {
+                    tryPlayBackgroundMusic();
+                } else {
+                    tryPauseBackgroundMusic();
+                }
+            });
+
+            // --- Floating Hearts and Flowers ---
+            const flowerEmojis = ['🌸', '🌺', '🌼', '🌷', '🌹'];
+            const heartEmojis = ['❤️', '🖤', '💕', '💞', '💓'];
+            const allEmojis = [...flowerEmojis, ...heartEmojis];
+
+            function createFloatingElement() {
+                const element = document.createElement('span');
+                element.classList.add('floating-element');
+                element.textContent = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+                element.style.fontSize = `${Math.random() * 2 + 1}rem`; // 1 to 3rem
+                element.style.left = `${Math.random() * 100}vw`;
+                element.style.animationDuration = `${Math.random() * 8 + 5}s`; // 5 to 13 seconds
+                element.style.animationDelay = `${Math.random() * 5}s`; // 0 to 5 seconds delay
+                floatingElementsContainer.appendChild(element);
+
+                element.addEventListener('animationend', () => {
+                    element.remove();
+                });
+            }
+
+            let floatingInterval;
+            function startFloatingElements() {
+                floatingInterval = setInterval(createFloatingElement, 500); // Create a new element every 0.5 seconds
+            }
+
+            // --- Interactive Birthday Cake ---
+            function generateCandles(count) {
+                candlesContainer.innerHTML = ''; // Clear existing candles
+                for (let i = 0; i < count; i++) {
+                    const candleDiv = document.createElement('div');
+                    candleDiv.classList.add('candle');
+                    const flameDiv = document.createElement('div');
+                    flameDiv.classList.add('flame');
+                    candleDiv.appendChild(flameDiv);
+                    candlesContainer.appendChild(candleDiv);
+                }
+                candlesLit = true;
+            }
+
+            cakeImage.addEventListener('click', () => {
+                if (candlesLit) {
+                    // Blow out animation
+                    const flames = document.querySelectorAll('.flame');
+                    flames.forEach(flame => {
+                        flame.parentElement.classList.add('candle-blow-out');
+                    });
+                    candlesLit = false;
+                    // Trigger confetti
+                    triggerConfetti(cakeImage);
+                    // Optional: Add a subtle sound effect here for blowing out
+                } else {
+                    // Re-light candles or just trigger confetti again
+                    triggerConfetti(cakeImage);
+                }
+            });
+
+            // --- Confetti for Cake Tap and Yes Button ---
+            function triggerConfetti(originElement) {
+                const numConfetti = 50;
+                const rect = originElement.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                for (let i = 0; i < numConfetti; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = `${centerX + (Math.random() - 0.5) * rect.width / 2}px`;
+                    confetti.style.top = `${centerY + (Math.random() - 0.5) * rect.height / 2}px`;
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`; // Random color
+                    confetti.style.animationDuration = `${Math.random() * 2 + 1}s`; // 1 to 3 seconds
+                    confetti.style.animationDelay = `${Math.random() * 0.5}s`; // Stagger delay
+                    document.body.appendChild(confetti);
+
+                    confetti.addEventListener('animationend', () => {
+                        confetti.remove();
+                    });
+                }
+            }
+
+            // --- Gift Button (Video Modal) ---
+            giftButton.addEventListener('click', () => {
+                videoModalOverlay.classList.add('active');
+
+                // Pause background music if it's playing
+                if (!backgroundMusic.paused) {
+                    tryPauseBackgroundMusic();
+                    backgroundMusic._wasPlayingBeforeVideo = true; // Flag to resume later
+                } else {
+                    backgroundMusic._wasPlayingBeforeVideo = false;
+                }
+
+                // Play the video
+                birthdayVideo.play();
+                // Ensure video is unmuted when played by user interaction
+                birthdayVideo.muted = false; // Unmute the video for playback
+            });
+
+            // --- Close Video Modal Button ---
+            closeVideoModalButton.addEventListener('click', () => {
+                videoModalOverlay.classList.remove('active');
+                birthdayVideo.pause();
+                birthdayVideo.currentTime = 0; // Resets video to the beginning
+                birthdayVideo.muted = true; // Mute video again when closed
+
+                // Resume background music if it was playing before the video
+                if (backgroundMusic._wasPlayingBeforeVideo) {
+                    tryPlayBackgroundMusic(); // Attempt to resume background music
+                }
+            });
+
+            // --- Close modal if clicked outside content ---
+            videoModalOverlay.addEventListener('click', (e) => {
+                if (e.target === videoModalOverlay) {
+                    videoModalOverlay.classList.remove('active');
+                    birthdayVideo.pause();
+                    birthdayVideo.currentTime = 0; // Resets video to the beginning
+                    birthdayVideo.muted = true; // Mute video again when closed
+
+                    // Resume background music if it was playing before the video
+                    if (backgroundMusic._wasPlayingBeforeVideo) {
+                        tryPlayBackgroundMusic(); // Attempt to resume background music
+                    }
+                }
+            });
+
+            // --- Video Playback Event Listeners for Music Control ---
+            birthdayVideo.addEventListener('play', () => {
+                // Pause background music if it's playing
+                if (!backgroundMusic.paused) {
+                    tryPauseBackgroundMusic();
+                    backgroundMusic._wasPlayingBeforeVideo = true; // Flag to resume later
+                } else {
+                    backgroundMusic._wasPlayingBeforeVideo = false;
+                }
+            });
+
+            birthdayVideo.addEventListener('ended', () => {
+                // Resume background music if it was playing before the video
+                if (backgroundMusic._wasPlayingBeforeVideo) {
+                    tryPlayBackgroundMusic(); // Attempt to resume background music
+                }
+                // Also close the modal when video ends
+                videoModalOverlay.classList.remove('active');
+                birthdayVideo.currentTime = 0; // Reset video to start
+                birthdayVideo.muted = true; // Mute video again when it ends
+            });
+
+
+            // --- Photo Card Intersection Observer for Animations ---
+            const photoObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const photoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.fromTo(entry.target,
+                            { opacity: 0, scale: 0.8, y: 50 },
+                            { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.7)" }
+                        );
+                        observer.unobserve(entry.target); // Animate once
+                    }
+                });
+            }, photoObserverOptions);
+
+            function observePhotos() {
+                photoCards.forEach(card => {
+                    photoObserver.observe(card);
+                });
+            }
+
+            // --- Section Visibility Observer (Fade-in on scroll) ---
+            const sectionObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // When 10% of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        // For the question section, start the quiz only when it's visible
+                        if (entry.target.id === 'questions-section' && currentQuestionIndex === 0) {
+                            displayQuestion();
+                        }
+                        // For the shayari section, start typing effect
+                        if (entry.target.id === 'shayari-section') {
+                            typeShayari();
+                        }
+                        // For the final message section, animate love meter
+                        if (entry.target.id === 'final-message-section') {
+                            animateLoveMeter();
+                        }
+                        observer.unobserve(entry.target); // Animate once
+                    }
+                });
+            }, sectionObserverOptions);
+
+            function observeSections() {
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.add('section-hidden'); // Ensure initial hidden state
+                    sectionObserver.observe(section);
+                });
+            }
+
+            // --- Funny Romantic Questions Section Logic ---
+            const questions = [
+                {
+                    question: "Kya Tumh Mujhe Abh Pareshan Karogi?",
+                    yesImage: "https://placehold.co/400x300/FF69B4/FFFFFF?text=YES!+%E2%9D%A4", // Placeholder for YES image 1
+                    noImage: "https://placehold.co/400x300/FF0000/FFFFFF?text=NO!+%F0%9F%99%88" // Placeholder for NO image 1
+                },
+                {
+                    question: "Kya Tumh Abh Uth-Patang Harkate Krogii?",
+                    yesImage: "https://placehold.co/400x300/8A2BE2/FFFFFF?text=Of+Course!+%F0%9F%98%8D", // Placeholder for YES image 2
+                    noImage: "https://placehold.co/400x300/FFA500/FFFFFF?text=Uhm...+NO!+%F0%9F%98%85" // Placeholder for NO image 2
+                },
+                {
+                    question: "Kya Tumh Mera Kehna Manoogi?",
+                    yesImage: "https://placehold.co/400x300/FFD700/000000?text=Absolutely!+%F0%9F%98%8B", // Placeholder for YES image 3
+                    noImage: "https://placehold.co/400x300/008000/FFFFFF?text=Pizza+Wins!+%F0%9F%8D%95" // Placeholder for NO image 3
+                },
+                {
+                    question: "I Love You Bologi Call Pr?", // The special question
+                    yesImage: "https://placehold.co/400x300/00BFFF/FFFFFF?text=YES!+A+Million+Times+YES!+%F0%9F%92%96", // Placeholder for YES image 4
+                    noImage: "https://placehold.co/400x300/FF4500/FFFFFF?text=Try+Again!+%F0%9F%98%AC" // Placeholder for NO image 4
+                }
+            ];
+
+            function displayQuestion() {
+                if (currentQuestionIndex < questions.length) {
+                    const q = questions[currentQuestionIndex];
+                    currentQuestionElement.textContent = q.question;
+                    questionImage.classList.add('hidden'); // Hide image for new question
+                    questionImage.src = ''; // Clear previous image
+                    gsap.fromTo(currentQuestionElement, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+                    gsap.fromTo([yesButton, noButton], { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1 });
+
+                    // Reset NO button position for new question
+                    gsap.set(noButton, { position: 'static', x: 0, y: 0 });
+                    noButton.classList.remove('no-button-jumping');
+                    noButtonClicks = 0; // Reset click counter for new question
+                } else {
+                    // All questions answered, hide question section or transition
+                    gsap.to(document.getElementById('questions-section'), { opacity: 0, duration: 1, onComplete: () => {
+                        document.getElementById('questions-section').style.display = 'none';
+                    }});
+                }
+            }
+
+            yesButton.addEventListener('click', () => {
+                const q = questions[currentQuestionIndex];
+                questionImage.src = q.yesImage;
+                questionImage.classList.remove('hidden');
+                gsap.fromTo(questionImage, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" });
+
+                // Special animation for the last question's YES
+                if (currentQuestionIndex === questions.length - 1) {
+                    burstHearts(yesButton); // Hearts bursting from YES button
+                    gsap.to([yesButton, noButton, currentQuestionElement, questionImageContainer], { opacity: 0, y: -50, duration: 0.8, ease: "power2.in", onComplete: () => {
+                        currentQuestionIndex++;
+                        displayQuestion(); // This will trigger the "all questions answered" logic
+                    }});
+                } else {
+                    gsap.to([yesButton, noButton, currentQuestionElement, questionImageContainer], { opacity: 0, y: -50, duration: 0.5, ease: "power1.in", onComplete: () => {
+                        currentQuestionIndex++;
+                        displayQuestion();
+                    }});
+                }
+            });
+
+            noButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default button behavior for jumping
+
+                const q = questions[currentQuestionIndex];
+                questionImage.src = q.noImage;
+                questionImage.classList.remove('hidden');
+                gsap.fromTo(questionImage, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" });
+
+                if (currentQuestionIndex === questions.length - 1) { // This is the 4th question
+                    noButtonClicks++;
+                    const buttonRect = noButton.getBoundingClientRect();
+                    const containerRect = noButton.parentElement.getBoundingClientRect();
+
+                    // Calculate random position within the parent container
+                    const maxX = containerRect.width - buttonRect.width;
+                    const maxY = containerRect.height - buttonRect.height;
+
+                    // Ensure button stays within the visible area of its parent
+                    const newX = Math.random() * (maxX - buttonRect.width / 2) + buttonRect.width / 4;
+                    const newY = Math.random() * (maxY - buttonRect.height / 2) + buttonRect.height / 4;
+
+                    gsap.to(noButton, {
+                        x: newX - (buttonRect.left - containerRect.left), // Adjust for current position
+                        y: newY - (buttonRect.top - containerRect.top),
+                        duration: 0.3,
+                        ease: "power1.out",
+                        overwrite: true, // Stop previous animation if new click occurs quickly
+                        onStart: () => {
+                            noButton.classList.add('no-button-jumping');
+                            noButton.style.position = 'absolute'; // Ensure absolute positioning for GSAP to move it
+                        }
+                    });
+
+                    // After a few attempts, maybe make the YES button more prominent or force it
+                    if (noButtonClicks >= 3) {
+                        gsap.to(yesButton, { scale: 1.1, duration: 0.3, yoyo: true, repeat: 1, ease: "elastic.out(1, 0.5)" });
+                    }
+                } else {
+                    gsap.to([yesButton, noButton, currentQuestionElement, questionImageContainer], { opacity: 0, y: -50, duration: 0.5, ease: "power1.in", onComplete: () => {
+                        currentQuestionIndex++;
+                        displayQuestion();
+                    }});
+                }
+            });
+
+            function burstHearts(originElement) {
+                const numHearts = 30;
+                const rect = originElement.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                for (let i = 0; i < numHearts; i++) {
+                    const heart = document.createElement('i');
+                    heart.classList.add('fas', 'fa-heart');
+                    heart.style.position = 'fixed';
+                    heart.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    heart.style.fontSize = `${Math.random() * 1.5 + 0.5}rem`;
+                    heart.style.zIndex = '9999';
+                    document.body.appendChild(heart);
+
+                    gsap.set(heart, {
+                        x: centerX,
+                        y: centerY,
+                        opacity: 1
+                    });
+
+                    gsap.to(heart, {
+                        x: centerX + (Math.random() - 0.5) * 400,
+                        y: centerY + (Math.random() - 0.5) * 400 - 200, // Float up more
+                        opacity: 0,
+                        scale: 0,
+                        rotation: Math.random() * 360,
+                        duration: Math.random() * 2 + 1,
+                        ease: "power1.out",
+                        onComplete: () => heart.remove()
+                    });
+                }
+            }
+
+            // --- Shayari Typing Effect ---
+            const shayariContent = `
+"Hasraten Machal Gayi Jab Tumhe Dekha
+Ek Pal Ke Liye, Woh Dewangi Kya Hogi
+Jabh Tumh Milogi Umar Bhar Ke Liye."
+            `.trim(); // Trim whitespace
+
+            function typeShayari() {
+                shayariTextElement.textContent = ''; // Clear content
+                let i = 0;
+                const speed = 50; // Milliseconds per character
+
+                // Remove previous animation if any
+                gsap.killTweensOf(shayariTextElement);
+                shayariTextElement.style.width = '0%'; // Reset width for typing effect
+
+                gsap.to(shayariTextElement, {
+                    width: '100%',
+                    duration: shayariContent.length * (speed / 1000), // Calculate duration based on text length and speed
+                    ease: "none",
+                    onUpdate: function() {
+                        const progress = this.progress();
+                        const charsToShow = Math.round(shayariContent.length * progress);
+                        shayariTextElement.textContent = shayariContent.substring(0, charsToShow);
+                    }
+                });
+            }
+
+            // --- Love Meter Animation ---
+            function animateLoveMeter() {
+                gsap.fromTo(loveMeterFill,
+                    { width: '0%' },
+                    { width: '100%', duration: 2, ease: "power2.out", onUpdate: function() {
+                        const percentage = Math.round(this.progress() * 100);
+                        loveMeterPercentage.textContent = `${percentage}%`;
+                    }}
+                );
+            }
+
+            // --- Animated Love Text (New Feature) ---
+            const loveFonts = [
+                'Dancing Script',
+                'Great Vibes',
+                'Pacifico',
+                'Caveat',
+                'Indie Flower',
+                'Poppins' // Include Poppins as a fallback/option
+            ];
+            const loveColors = [
+                '#FF69B4', '#EE82EE', '#FF1493', '#C71585', '#DB7093', // Pinks & Purples
+                '#FFD700', '#FF4500', '#00BFFF', '#32CD32' // Gold, Orange, Blue, Green
+            ];
+            let currentLoveFontIndex = 0;
+            let currentLoveColorIndex = 0;
+
+            function animateLoveText() {
+                // Change font
+                currentLoveFontIndex = (currentLoveFontIndex + 1) % loveFonts.length;
+                animatedLoveSpan.style.fontFamily = `'${loveFonts[currentLoveFontIndex]}', cursive`;
+
+                // Change color
+                currentLoveColorIndex = (currentLoveColorIndex + 1) % loveColors.length;
+                animatedLoveSpan.style.color = loveColors[currentLoveColorIndex];
+
+                // Optional: Add a subtle scale animation for a pop effect
+                gsap.fromTo(animatedLoveSpan, { scale: 1.1 }, { scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+            }
+
+            let loveAnimationInterval;
+            function startAnimatedLove() {
+                // Initial state
+                animatedLoveSpan.style.fontFamily = `'${loveFonts[0]}', cursive`;
+                animatedLoveSpan.style.color = loveColors[0];
+                loveAnimationInterval = setInterval(animateLoveText, 1500); // Change every 1.5 seconds
+            }
+
+            // Initial setup for sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('section-hidden');
+            });
+
+            // Trigger photo observer on initial load
+            observePhotos();
+        });
+    </script>
+</body>
+</html>
+�
